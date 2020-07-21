@@ -9,6 +9,8 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Modal from '@material-ui/core/Modal';
 import Button from '@material-ui/core/Button';
+import { Grid } from '@material-ui/core';
+
 
 import './App.css';
 import data from './test.json';
@@ -57,33 +59,61 @@ const useStyles = makeStyles((theme) => ({
   },
   paperModal: {
     position: 'absolute',
-    width: 400,
+    width: 600,
     backgroundColor: theme.palette.background.paper,
     border: '2px solid #000',
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
   },
+  header:{
+    fontWeight: '800',
+  }
 }));
 
 function App() {
   const classes = useStyles();
-  const [modalStyle] = React.useState(getModalStyle);
+  const [modalStyle] = useState(getModalStyle);
   const [open, setOpen] = useState(false);
+  const [userName, setUserName] = useState(null);
+  // const [startTime, setStartTime] = useState([]);
+  // const [endTime, setEndTime] = useState([]);
+  const [modalContent, setModalContent ] = useState([]);
 
-  const handleOpen = () => {
+  const handleOpen = (userName, modalContent) => {
+    setUserName(userName);
     setOpen(true);
+    // setStartTime(startArray);
+    // setEndTime(endArray);
+    setModalContent(modalContent);
   };
 
   const handleClose = () => {
     setOpen(false);
   };
+
   const body = (
     <div style={modalStyle} className={classes.paperModal}>
-      <h3 id="title">Particular user activity</h3>
-      <p id="simple-modal-description">
-        {/* Duis mollis, est non commodo luctus, nisi erat porttitor ligula. */}
-        <Button onClick={handleClose}> Cancel</Button>
-      </p>
+      <h3 id="title">{userName}</h3>
+      <Grid container>
+          <Grid item className={classes.header} >
+          Start Time
+        </Grid>
+        <Grid item className={classes.header}>
+        End Time
+          </Grid>
+          </Grid>
+      {modalContent.map(((item, index) => {
+        return( 
+        <Grid container key = {index}>
+          <Grid item >
+          {item.start_time}
+        </Grid>
+        <Grid item align="right">
+        {item.end_time}
+          </Grid>
+          </Grid>)
+      }))}
+        <Button onClick={handleClose}>Cancel</Button>    
     </div>
   );
 
@@ -103,7 +133,7 @@ function App() {
         </TableHead>
         <TableBody>
           {rows.map(({id, name, tz, activity_periods}) => (
-            <StyledTableRow key={id} onClick={() => handleOpen(activity_periods)}>
+            <StyledTableRow key={id} onClick={() => handleOpen(name, activity_periods)}>
               <StyledTableCell component="th" scope="row">
                 {id}
               </StyledTableCell>
