@@ -118,7 +118,8 @@ function App() {
           </Grid>
           </Grid>)
       }))}
-        <Button onClick={handleClose}>Cancel</Button>    
+        <Button onClick={handleClose}>Cancel</Button>
+        <Button onClick={handleClose}>Open in Calender</Button>
     </div>
   );
 
