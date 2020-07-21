@@ -67,7 +67,14 @@ const useStyles = makeStyles((theme) => ({
   },
   header:{
     fontWeight: '800',
-  }
+  },
+  headerEnd:{
+    fontWeight: '800',
+    marginLeft: 'auto'
+  },
+  formatEndTime:{
+    marginLeft: 'auto'
+  },
 }));
 
 function App() {
@@ -82,8 +89,6 @@ function App() {
   const handleOpen = (userName, modalContent) => {
     setUserName(userName);
     setOpen(true);
-    // setStartTime(startArray);
-    // setEndTime(endArray);
     setModalContent(modalContent);
   };
 
@@ -98,7 +103,7 @@ function App() {
           <Grid item className={classes.header} >
           Start Time
         </Grid>
-        <Grid item className={classes.header}>
+        <Grid item className={classes.headerEnd}>
         End Time
           </Grid>
           </Grid>
@@ -108,7 +113,7 @@ function App() {
           <Grid item >
           {item.start_time}
         </Grid>
-        <Grid item align="right">
+        <Grid item className={classes.formatEndTime}>
         {item.end_time}
           </Grid>
           </Grid>)
