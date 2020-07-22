@@ -10,7 +10,7 @@ import Paper from '@material-ui/core/Paper';
 import Modal from '@material-ui/core/Modal';
 import Button from '@material-ui/core/Button';
 import { Grid } from '@material-ui/core';
-
+import MyCalendar from './Calendar';
 
 import './App.css';
 import data from './test.json';
@@ -56,6 +56,7 @@ function getModalStyle() {
 const useStyles = makeStyles((theme) => ({
   paper:{
     width: '70%',
+    margin: 'auto'
   },
   paperModal: {
     position: 'absolute',
@@ -158,6 +159,7 @@ function App() {
       >
         {body}
       </Modal>
+          <MyCalendar/>
     </div>
   );
 }
