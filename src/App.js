@@ -83,17 +83,23 @@ function App() {
   const [modalStyle] = useState(getModalStyle);
   const [open, setOpen] = useState(false);
   const [userName, setUserName] = useState(null);
-  // const [startTime, setStartTime] = useState([]);
-  // const [endTime, setEndTime] = useState([]);
   const [modalContent, setModalContent ] = useState([]);
+  const [CalendarOpen, setCalendarOpen] = useState(false);
 
   const handleOpen = (userName, modalContent) => {
     setUserName(userName);
     setOpen(true);
     setModalContent(modalContent);
+    setCalendarOpen(false);
   };
 
   const handleClose = () => {
+    setOpen(false);
+    setCalendarOpen(false);
+  };
+
+  const handleCalendar = () =>{
+    setCalendarOpen(true);
     setOpen(false);
   };
 
@@ -120,7 +126,7 @@ function App() {
           </Grid>)
       }))}
         <Button onClick={handleClose}>Cancel</Button>
-        <Button onClick={handleClose}>Open in Calender</Button>
+        <Button onClick={handleCalendar}>Open in Calender</Button>
     </div>
   );
 
@@ -159,7 +165,10 @@ function App() {
       >
         {body}
       </Modal>
-          <MyCalendar/>
+          {CalendarOpen ? 
+          <MyCalendar
+          activity_periods={modalContent}
+            /> : null}
     </div>
   );
 }
