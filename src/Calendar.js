@@ -5,6 +5,7 @@ import React from 'react';
 import startOfWeek from 'date-fns/startOfWeek'
 import getDay from 'date-fns/getDay'
 import 'react-big-calendar/lib/css/react-big-calendar.css';
+const moment = require('moment');
 const locales = {
   'en-US': require('date-fns/locale/en-US'),
 }
@@ -17,8 +18,14 @@ const localizer = dateFnsLocalizer({
 })
 
 const MyCalendar = (props) => {
+    const { activity_periods } = props;
     console.log('props', props);
-    const myEventsList = [props.activity_periods];
+    const myEventsList = [{
+        title: 'Website Re-Design Plan',
+        startDate: new Date(2020, 5, 25, 9, 35),
+        endDate: new Date(2020, 5, 25, 11, 30),
+        id: 0
+    }];
     return (
   <div>
     <Calendar
