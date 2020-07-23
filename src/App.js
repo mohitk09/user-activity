@@ -39,18 +39,14 @@ function createData(id, name, tz, activity_periods) {
 const rows = data.members.map(({ id, real_name, tz, activity_periods })  => createData(
   id, real_name, tz, activity_periods));
 
-function rand() {
-  return Math.round(Math.random() * 20) - 10;
-}
 
 function getModalStyle() {
-  const top = 50 + rand();
-  const left = 50 + rand();
+  const top = 27;
+  const left = 27;
 
   return {
     top: `${top}%`,
     left: `${left}%`,
-    transform: `translate(-${top}%, -${left}%)`,
   };
 }
 const useStyles = makeStyles((theme) => ({

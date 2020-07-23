@@ -19,22 +19,29 @@ const localizer = dateFnsLocalizer({
 
 const MyCalendar = (props) => {
     const { activity_periods } = props;
-    console.log('props', props);
-    const myEventsList = [{
-        title: 'Website Re-Design Plan',
-        startDate: new Date(2020, 5, 25, 9, 35),
-        endDate: new Date(2020, 5, 25, 11, 30),
-        id: 0
-    }];
+    const myEventsList = [];
+    
+    activity_periods.map((item, index) =>{
+        const start = moment(item.start_time).format('MMMM Do YYYY, h:mm a');
+        const end = moment(item.end_time).format('MMMM Do YYYY, h:mm a');
+        console.log(start, end);
+        myEventsList.push({
+            title: `Activity ${index+1}`,
+            start: item.start_time,
+            end : item.endTime,
+            allDay: false,
+        })
+        return null;
+    });
     return (
-  <div>
-    <Calendar
-      localizer={localizer}
-      events={myEventsList}
-      startAccessor="start"
-      endAccessor="end"
-      style={{ height: 500 }}
-    />
-  </div>
+        <div>
+        <Calendar
+        localizer={localizer}
+        events={myEventsList}
+        startAccessor="start"
+        endAccessor="end"
+        style={{ height: 500 }}
+        />
+    </div>
 )};
 export default MyCalendar;
