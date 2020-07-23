@@ -27,8 +27,8 @@ const MyCalendar = (props) => {
         console.log(start, end);
         myEventsList.push({
             title: `Activity ${index+1}`,
-            start: item.start_time,
-            end : item.endTime,
+            start,
+            end,
             allDay: false,
         })
         return null;
