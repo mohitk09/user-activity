@@ -18,13 +18,11 @@ const localizer = dateFnsLocalizer({
 })
 
 const MyCalendar = (props) => {
-    const { activity_periods } = props;
+    const { activity_periods, tz } = props;
     const myEventsList = [];
-    
     activity_periods.map((item, index) =>{
-        const start = moment(item.start_time).format('MMMM Do YYYY, h:mm a');
-        const end = moment(item.end_time).format('MMMM Do YYYY, h:mm a');
-        console.log(start, end);
+        const start = new Date(moment(item.start_time).locale(tz).format("MMM DD, YYYY HH:MM"));
+        const end = new Date(moment(item.end_time).locale(tz).format("MMM DD, YYYY HH:MM"));
         myEventsList.push({
             title: `Activity ${index+1}`,
             start,

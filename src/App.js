@@ -80,12 +80,14 @@ function App() {
   const [open, setOpen] = useState(false);
   const [userName, setUserName] = useState(null);
   const [modalContent, setModalContent ] = useState([]);
+  const [tz, setTz] = useState(null);
   const [CalendarOpen, setCalendarOpen] = useState(false);
 
-  const handleOpen = (userName, modalContent) => {
+  const handleOpen = (userName, modalContent, tz) => {
     setUserName(userName);
     setOpen(true);
     setModalContent(modalContent);
+    setTz(tz);
     setCalendarOpen(false);
   };
 
@@ -142,7 +144,7 @@ function App() {
         </TableHead>
         <TableBody>
           {rows.map(({id, name, tz, activity_periods}) => (
-            <StyledTableRow key={id} onClick={() => handleOpen(name, activity_periods)}>
+            <StyledTableRow key={id} onClick={() => handleOpen(name, activity_periods, tz)}>
               <StyledTableCell component="th" scope="row">
                 {id}
               </StyledTableCell>
@@ -164,6 +166,7 @@ function App() {
           {CalendarOpen ? 
           <MyCalendar
           activity_periods={modalContent}
+          tz={tz}
             /> : null}
     </div>
   );
